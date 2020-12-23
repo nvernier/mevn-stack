@@ -7,12 +7,12 @@ const { register, login } = require('../controllers/authController')
 
 router.route('/')
     .get((req, res) => {
-        res.status(200).send('Hello World !')
+        res.status(200).json({ message: 'Hello World !' })
     })
 
 router.route('/dashboard')
     .get(ensureAuthenticated, (req, res) => {
-        res.status(200).send('Secured Dashboard')
+        res.status(200).json({ message: 'Welcome to your personal dahsboard' })
     })
 
 router.route('/login')
