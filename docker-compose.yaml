@@ -1,0 +1,72 @@
+version: '3'
+services:
+    backend:
+        build:
+            args:
+                user: ${NODE_USER}
+                uid: ${NODE_UID}
+            context: ./docker-compose/backend
+            dockerfile: Dockerfile
+        container_name: app-backend
+        depends_on:
+            - db
+        working_dir: /var/www/app
+        entrypoint: ['npm', 'run', 'dev']
+        ports:
+            - '127.0.0.1:5000:5000'
+        volumes:
+            - ./app/backend:/var/www/app
+        networks:
+            - app
+
+    frontend:
+        build:
+            args:
+                user: ${NODE_USER}
+                uid: ${NODE_UID}
+            context: ./docker-compose/frontend
+            dockerfile: Dockerfile
+        container_name: app-frontend
+        depends_on:
+            - db
+        working_dir: /var/www/app
+        entrypoint: ['npm', 'run', 'serve']
+        ports:
+            - '127.0.0.1:5000:5000'
+        volumes:
+            - ./app/frontend:/var/www/app
+        networks:
+            - app
+
+    db:
+        image: mongo:4.4-bionic
+        container_name: app-db
+        volumes:
+            - ./docker-compose/mongodb/initdb:/docker-entrypoint-initdb.d
+            - ./docker-compose/mongodb/data:/data/db
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: ${DB_ADMIN_USERNAME}
+            MONGO_INITDB_ROOT_PASSWORD: ${DB_ADMIN_PASSWORD}
+        networks:
+            - app
+
+    admin:
+        image: mongo-express
+        container_name: app-admin
+        depends_on:
+            - db
+        ports:
+            - '127.0.0.1:8081:8081'
+        environment:
+            ME_CONFIG_MONGODB_ADMINUSERNAME: ${DB_ADMIN_USERNAME}
+            ME_CONFIG_MONGODB_ADMINPASSWORD: ${DB_ADMIN_PASSWORD}
+            ME_CONFIG_MONGODB_ENABLE_ADMIN: 'true'
+            ME_CONFIG_MONGODB_SERVER: db
+            ME_CONFIG_MONGODB_PORT: 27017
+        networks:
+            - app
+
+
+networks:
+    app:
+        driver: bridge
