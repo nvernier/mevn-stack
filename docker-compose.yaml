@@ -32,7 +32,7 @@ services:
         working_dir: /var/www/app
         entrypoint: ['npm', 'run', 'serve']
         ports:
-            - '127.0.0.1:5000:5000'
+            - '127.0.0.1:8080:8080'
         volumes:
             - ./app/frontend:/var/www/app
         networks:
