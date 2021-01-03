@@ -5,6 +5,7 @@ import router from './router'
 import store from './store'
 
 // styles
+import 'materialize-css/dist/css/materialize.css'
 import './assets/style.css'
 
 Vue.config.productionTip = false

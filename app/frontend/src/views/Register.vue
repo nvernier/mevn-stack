@@ -1,26 +1,41 @@
 <template>
-    <div class="container flex">
-        <div class='card'>
-            <div class='card-content'>
-                <h1>Register</h1>
-                <form action="" class="form">
-                    <label for="username">Username</label>
-                    <input class="form-input" type="text" name="username" id="username" placeholder="Username">
-                    <label for="password">Password</label>
-                    <input class="form-input" type="password" name="password" id="password" placeholder="Password">
-                    <label for="confirm-password">Confirm Password</label>
-                    <input class="form-input" type="password" name="confirm-password" id="confirm-password" placeholder="Confirm Password">
-                    <div class="form-buttons">
-                        <button type="submit" class="btn-primary">Submit </button>
-                    </div>
-                </form>
+    <div class="row">
+        <div class="col s6 offset-s3">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">Register</span>
+                    <form action="">
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <label for="username">Username</label>
+                                <input placeholder="Username" id="username" type="text" class="validate">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password" type="password" placeholder="Super Secret Password" class="validate">
+                                <label for="password">Password</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <input id="password-2" type="password" placeholder="Password" class="validate">
+                                <label for="password-2">Confirm Password</label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-action">
+                    <button type="submit" class="btn waves-effect waves-light">Submit<i class="material-icons right">send</i></button>
+                </div>
             </div>
         </div>
     </div>
 </template>
 
 <style lang="css" scoped>
-    .card {
-        max-width: 40rem;
+    .row {
+        margin: 0;
+        padding: 0;
     }
 </style>

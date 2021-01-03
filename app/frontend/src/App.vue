@@ -1,15 +1,21 @@
 <template>
-    <div id="app" class="container">
+    <div id="app">
         <Navbar />
-        <router-view />
+        <div class="container">
+            <router-view />
+        </div>
     </div>
 </template>
 
 <script>
+import M from 'materialize-css'
 import Navbar from '@/components/Navbar'
 export default {
     components: {
         Navbar
+    },
+    mounted () {
+        M.AutoInit()
     }
 }
 </script>
