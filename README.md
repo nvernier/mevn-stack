@@ -26,3 +26,4 @@ docker-compose run --rm --entrypoint "npm install" frontend
 docker-compose up -d
 ```
 
+https://www.digitalocean.com/community/tutorials/how-to-set-up-vue-js-authentication-and-route-handling-using-vue-router

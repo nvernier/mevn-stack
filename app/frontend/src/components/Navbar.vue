@@ -1,13 +1,17 @@
 <template>
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper" v-if="isAuthenticated">
             <router-link to="/" class="brand-logo left">Home</router-link>
             <ul id="nav-mobile" class="right hide-on-med-and-down">
-                <li><router-link to="/about">About</router-link></li>
-                <li><router-link to="/login">Login</router-link></li>
-                <li><router-link to="/register">Register</router-link></li>
                 <li><router-link to="/dashboard">Dashboard</router-link></li>
                 <li><a v-on:click="signout">Sign Out</a></li>
+            </ul>
+        </div>
+        <div class="nav-wrapper" v-else>
+            <router-link to="/" class="brand-logo left">Home</router-link>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><router-link to="/login">Login</router-link></li>
+                <li><router-link to="/register">Register</router-link></li>
             </ul>
         </div>
     </nav>
@@ -15,14 +19,15 @@
 
 <script>
 export default {
-    data () {
-        return {
-            isAuthenticated: true
+    computed: {
+        isAuthenticated () {
+            return this.$store.getters.isAuthenticated
         }
     },
     methods: {
         signout () {
-            this.isAuthenticated = false
+            this.$store.dispatch('logout')
+            this.$router.push('/login')
         }
     }
 }
