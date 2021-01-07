@@ -1,6 +1,6 @@
 # mevn-stack
 MEVN: MongoDB-Express-Vue.js-Node.js stack 'template' with authentication
-
+when used as a template for another git remote : git pull origin branchname --allow-unrelated-histories
 ## Run it
 1. 
 ```bash 
