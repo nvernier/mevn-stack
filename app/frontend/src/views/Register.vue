@@ -43,8 +43,15 @@ export default {
         }
     },
     methods: {
-        submit (event) {
-            this.$store.dispatch('register', { username: this.username, password: this.password, password2: this.password2 })
+        async submit (event) {
+            try {
+                const response = await this.$store.dispatch('register', { username: this.username, password: this.password, password2: this.password2 })
+                if (response.status === 200) {
+                    this.$router.push('Dashboard')
+                }
+            } catch (err) {
+                console.log(`an error has happened: ${err}`)
+            }
         }
     }
 }
